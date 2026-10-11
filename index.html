@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeFlow | Blood Bank Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>🩸 LifeFlow</h2>
+    <p class="side-label">MAIN MENU</p>
+    <a href="#dashboard">▦ Dashboard</a>
+    <a href="#donors">👥 Donors</a>
+    <a href="#inventory">🩸 Blood Inventory</a>
+    <a href="#requests">📋 Blood Requests</a>
+    <p class="side-note">Every drop counts.<br>Every donor matters.</p>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">BLOOD BANK MANAGEMENT SYSTEM</p>
+        <h1>Dashboard</h1>
+        <p class="muted">Manage donors, blood stock and requests.</p>
+      </div>
+      <span class="status">● System Active</span>
+    </header>
+
+    <section class="stats">
+      <article class="stat-card">
+        <span class="stat-icon">👥</span>
+        <p>Total Donors</p>
+        <h2 id="totalDonors">0</h2>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">🩸</span>
+        <p>Total Blood Units</p>
+        <h2 id="totalUnits">0</h2>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon">📋</span>
+        <p>Pending Requests</p>
+        <h2 id="pendingRequests">0</h2>
+      </article>
+    </section>
+
+    <section class="panel" id="inventory">
+      <div class="section-title">
+        <div>
+          <h2>Blood Inventory</h2>
+          <p class="muted">Available units by blood group</p>
+        </div>
+      </div>
+      <div class="inventory-grid" id="inventoryGrid"></div>
+
+      <h3 class="subheading">Update Stock</h3>
+      <form id="stockForm" class="inline-form">
+        <select id="stockGroup" aria-label="Blood group"></select>
+        <input id="stockUnits" type="number" min="1" max="10000"
+          step="1" placeholder="Units to add or remove" required>
+        <select id="stockAction" aria-label="Stock action">
+          <option value="add">Add units</option>
+          <option value="remove">Remove units</option>
+        </select>
+        <button class="btn" type="submit">Update Stock</button>
+      </form>
+      <p id="stockMessage" class="message" role="status"></p>
+    </section>
+
+    <section class="panel" id="donors">
+      <div class="section-title">
+        <div>
+          <h2>Donor Management</h2>
+          <p class="muted">Register and search blood donors</p>
+        </div>
+      </div>
+
+      <form id="donorForm" class="form-grid">
+        <div>
+          <label for="donorName">Full Name *</label>
+          <input id="donorName" maxlength="100" required
+            placeholder="Enter donor name">
+        </div>
+        <div>
+          <label for="donorAge">Age *</label>
+          <input id="donorAge" type="number" min="18" max="120"
+            required placeholder="Age">
+        </div>
+        <div>
+          <label for="donorGroup">Blood Group *</label>
+          <select id="donorGroup" required></select>
+        </div>
+        <div>
+          <label for="donorPhone">Phone Number *</label>
+          <input id="donorPhone" type="tel" maxlength="20"
+            required placeholder="Contact number">
+        </div>
+        <div class="full">
+          <label for="donorCity">City / Area *</label>
+          <input id="donorCity" maxlength="100" required
+            placeholder="City or area">
+        </div>
+        <button class="btn full" type="submit">+ Register Donor</button>
+      </form>
+
+      <div class="table-tools">
+        <input id="donorSearch" type="search"
+          placeholder="Search donors by name or city...">
+        <select id="donorFilter" aria-label="Filter donors by blood group"></select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Blood Group</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="donorTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="requests">
+      <div class="section-title">
+        <div>
+          <h2>Blood Requests</h2>
+          <p class="muted">Record and track requests for blood</p>
+        </div>
+      </div>
+
+      <form id="requestForm" class="form-grid">
+        <div>
+          <label for="patientName">Patient Name *</label>
+          <input id="patientName" maxlength="100" required
+            placeholder="Patient name">
+        </div>
+        <div>
+          <label for="hospital">Hospital *</label>
+          <input id="hospital" maxlength="150" required
+            placeholder="Hospital name">
+        </div>
+        <div>
+          <label for="requestGroup">Blood Group *</label>
+          <select id="requestGroup" required></select>
+        </div>
+        <div>
+          <label for="requestUnits">Units Needed *</label>
+          <input id="requestUnits" type="number" min="1" max="1000"
+            step="1" required placeholder="Number of units">
+        </div>
+        <button class="btn full" type="submit">+ Submit Request</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Hospital</th>
+              <th>Blood Group</th>
+              <th>Units</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="requestTable"></tbody>
+        </table>
+      </div>
+      <p id="requestMessage" class="message" role="status"></p>
+    </section>
+
+    <footer>LifeFlow Blood Bank Management · College Project</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
